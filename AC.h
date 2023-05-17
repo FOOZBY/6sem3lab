@@ -74,7 +74,7 @@ void ArithmeticCoding()
 		
 		for (map<char,Segment>::iterator j = segments.begin(); j != segments.end(); j++)
 		{
-			if (result > j->second.left && result <= j->second.right)
+			if (result >= j->second.left && result < j->second.right)
 			{
 				decode += j->first;
 				result = (result - j->second.left) / (j->second.right - j->second.left);
