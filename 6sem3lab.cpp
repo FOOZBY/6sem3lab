@@ -1,5 +1,5 @@
-#include "HA.h"
-
+﻿#include "HA.h"
+#include "AC.h"
 
 int main()
 {
@@ -124,7 +124,7 @@ int main()
         cout << "4 entered" << endl;//Преобразование MTF
         break;
     case 5:
-        cout << "5 entered" << endl;//Арифметическое кодирование (AC)
+        ArithmeticCoding();//Арифметическое кодирование (AC)
         break;
     case 6:
         cout << "6 entered" << endl;//PPM алгоритм
