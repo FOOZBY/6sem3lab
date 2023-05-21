@@ -150,32 +150,36 @@ void Huffman_alg()
 	g.close();
 	cout << "сжатые данные записаны в файл 'output.bin'." << endl;
 
-
-	//раскодирование файла обратно и вывод результата(должно совпадать с изначальным текстом)
-	/*ifstream F("output.bin", ios::in | ios::binary);
-	Node* p = root;
-	count = 0; 
-	char byte;
-	byte = F.get();
-	while (!F.eof())
+	cout << "Декодировать файл обратно?[Y(y)/N(n)]: ";
+	char choice;
+	cin >> choice;
+	if (choice == 'Y' || choice == 'y')
 	{
-		bool b = byte & (1 << (7 - count));
-		if (b)
-			p = p->right; 
-		else 
-			p = p->left;
-		if (p && (p->left == NULL && p->right == NULL)) 
-		{ 
-			cout << p->c; 
-			p = root; 
+		//раскодирование файла обратно и вывод результата(должно совпадать с изначальным текстом)
+		ifstream F("output.bin", ios::in | ios::binary);
+		Node* p = root;
+		count = 0;
+		char byte;
+		byte = F.get();
+		while (!F.eof())
+		{
+			bool b = byte & (1 << (7 - count));
+			if (b)
+				p = p->right;
+			else
+				p = p->left;
+			if (p && (p->left == NULL && p->right == NULL))
+			{
+				cout << p->c;
+				p = root;
+			}
+			count++;
+			if (count == 8)
+			{
+				count = 0;
+				byte = F.get();
+			}
 		}
-		count++;
- 		if (count == 8) 
-		{ 
-			count = 0;
-			byte = F.get(); 
-		}
+		F.close();
 	}
-
-	F.close();*/
 }

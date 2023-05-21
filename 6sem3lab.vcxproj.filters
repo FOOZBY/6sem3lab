@@ -29,5 +29,8 @@
     <ClInclude Include="AC.h">
       <Filter>Исходные файлы</Filter>
     </ClInclude>
+    <ClInclude Include="RLE.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

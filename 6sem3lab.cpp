@@ -1,5 +1,6 @@
 ﻿#include "HA.h"
 #include "AC.h"
+#include "RLE.h"
 
 int main()
 {
@@ -17,7 +18,7 @@ int main()
             SetConsoleTextAttribute(descriptor, 2);
             cout << "1. Алгоритм Хаффмана (HA)" << endl;
             SetConsoleTextAttribute(descriptor, 7);
-            cout << "2. Кодирование длин серий (RKE)" << endl;
+            cout << "2. Кодирование длин серий (RLE)" << endl;
             cout << "3. Алгоритм Лемпеля-Зива (LZ78)" << endl;
             cout << "4. Преобразование Барроуза-Уиллера (BWT)" << endl;
             cout << "5. Преобразование MTF" << endl;
@@ -28,7 +29,7 @@ int main()
         {
             cout << "1. Алгоритм Хаффмана (HA)" << endl;
             SetConsoleTextAttribute(descriptor, 2);
-            cout << "2. Кодирование длин серий (RKE)" << endl;
+            cout << "2. Кодирование длин серий (RLE)" << endl;
             SetConsoleTextAttribute(descriptor, 7);
             cout << "3. Алгоритм Лемпеля-Зива (LZ78)" << endl;
             cout << "4. Преобразование Барроуза-Уиллера (BWT)" << endl;
@@ -39,7 +40,7 @@ int main()
         if (key == 2)
         {            
             cout << "1. Алгоритм Хаффмана (HA)" << endl;            
-            cout << "2. Кодирование длин серий (RKE)" << endl;
+            cout << "2. Кодирование длин серий (RLE)" << endl;
             SetConsoleTextAttribute(descriptor, 2);
             cout << "3. Алгоритм Лемпеля-Зива (LZ78)" << endl;
             SetConsoleTextAttribute(descriptor, 7);
@@ -51,7 +52,7 @@ int main()
         if (key == 3)
         {            
             cout << "1. Алгоритм Хаффмана (HA)" << endl;            
-            cout << "2. Кодирование длин серий (RKE)" << endl;
+            cout << "2. Кодирование длин серий (RLE)" << endl;
             cout << "3. Алгоритм Лемпеля-Зива (LZ78)" << endl;
             SetConsoleTextAttribute(descriptor, 2);
             cout << "4. Преобразование Барроуза-Уиллера (BWT)" << endl;
@@ -63,7 +64,7 @@ int main()
         if (key == 4)
         {
             cout << "1. Алгоритм Хаффмана (HA)" << endl;            
-            cout << "2. Кодирование длин серий (RKE)" << endl;
+            cout << "2. Кодирование длин серий (RLE)" << endl;
             cout << "3. Алгоритм Лемпеля-Зива (LZ78)" << endl;
             cout << "4. Преобразование Барроуза-Уиллера (BWT)" << endl;
             SetConsoleTextAttribute(descriptor, 2);
@@ -75,7 +76,7 @@ int main()
         if (key == 5)
         {           
             cout << "1. Алгоритм Хаффмана (HA)" << endl;            
-            cout << "2. Кодирование длин серий (RKE)" << endl;
+            cout << "2. Кодирование длин серий (RLE)" << endl;
             cout << "3. Алгоритм Лемпеля-Зива (LZ78)" << endl;
             cout << "4. Преобразование Барроуза-Уиллера (BWT)" << endl;
             cout << "5. Преобразование MTF" << endl;
@@ -87,7 +88,7 @@ int main()
         if (key == 6)
         {            
             cout << "1. Алгоритм Хаффмана (HA)" << endl;           
-            cout << "2. Кодирование длин серий (RKE)" << endl;
+            cout << "2. Кодирование длин серий (RLE)" << endl;
             cout << "3. Алгоритм Лемпеля-Зива (LZ78)" << endl;
             cout << "4. Преобразование Барроуза-Уиллера (BWT)" << endl;
             cout << "5. Преобразование MTF" << endl;
@@ -112,7 +113,7 @@ int main()
         Huffman_alg();//Алгоритм Хаффмана (HA)
         break;
     case 1:
-        cout << "1 entered" << endl;//Кодирование длин серий (RKE)
+        RLE();//Кодирование длин серий (RLE)
         break;
     case 2:
         cout << "2 entered" << endl;//Алгоритм Лемпеля-Зива (LZ78)

@@ -3,7 +3,7 @@
 
 struct Segment
 {
-	double left, right;
+	long double left, right;
 };
 
 
@@ -38,11 +38,12 @@ void ArithmeticCoding()
 		itr->second = itr->second / n;
 		cout << itr->first << ":" << itr->second << endl;
 	}
-
+	int num = -1;
+	long factorial = 1.0;
 
 
 	map<char, Segment> segments;//создаём таблицу сегментов, где каждый символ находится в отрезке от 0 до 1
-	double l = 0;
+	long double l = 0;
 	for (map<char, double>::iterator itr = freq.begin(); itr != freq.end(); ++itr)
 	{
 		segments[itr->first].left = l;
@@ -52,17 +53,17 @@ void ArithmeticCoding()
 	}
 
 
-	double left = 0, right = 1;//кодируем изначальную строку в некий код, представленный вещественным числом от 0 до 1
+	long double left = 0, right = 1;//кодируем изначальную строку в некий код, представленный вещественным числом от 0 до 1
 	for (int i = 0; i < original_text.size(); i++)
 	{
 		char ch = original_text[i];
-		double new_right = left + (right - left) * segments[ch].right;
-		double new_left = left + (right - left) * segments[ch].left;
+		long double new_right = left + (right - left) * segments[ch].right;
+		long double new_left = left + (right - left) * segments[ch].left;
 		right = new_right;
 		left = new_left;
 		cout << left << ";" << right << endl;
 	}
-	double result = (left + right) / 2;
+	long double result = (left + right) / 2;
 	cout << "закодировано в " << result << endl;
 	cout << "файл считан" << endl;
 

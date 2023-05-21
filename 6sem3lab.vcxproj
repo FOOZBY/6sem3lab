@@ -133,6 +133,7 @@
     <ClInclude Include="AC.h" />
     <ClInclude Include="HA.h" />
     <ClInclude Include="incudes.h" />
+    <ClInclude Include="RLE.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
