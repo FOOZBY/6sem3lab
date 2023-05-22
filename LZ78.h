@@ -1,8 +1,8 @@
 #include "incudes.h"
 
-void RLE()
+void LZ78()
 {
-    string text = "", sub_str = "";
+    string text="", sub_str = "";
     HANDLE descriptor = GetStdHandle(STD_OUTPUT_HANDLE);
     short key = 0, code = 0;
     do
@@ -40,7 +40,7 @@ void RLE()
     {
         cout << "¬ведите текст: ";
         getline(cin, text);
-        break;
+        break; 
     }
     case 1:
     {
@@ -55,40 +55,31 @@ void RLE()
         }
         cout << "файл считан" << endl;
         f.close();
-        break;
+        break; 
     }
     default:
         cout << "error found, fix it!" << endl;
         break;
     }
     ofstream g("output.bin");
-    int n = text.length();
-    for (int i = 0; i < n; i++) 
+    map<string, int> dict;
+    int index = 1;
+    dict[""] = 0;
+    for (int i = 0; i < text.length(); i++)
     {
-        sub_str = "";
-        int count = 0;
-        while (i < n && text[i] != text[i+1])
+        
+        string temp= "";
+        temp += text[i];
+        while (dict.find(temp) != dict.end())
         {
-            sub_str += text[i];
-            count++;
             i++;
+            temp += text[i];
         }
-        if(count) 
-            cout << count * (-1) << sub_str;
-        g << count * (-1) << sub_str;
-        sub_str = "";
-        count = 1;
-        while (i < n && text[i] == text[i + 1])
-        {
-            sub_str += text[i];
-            count++;
-            i++;
-        }
-        if (i != n) 
-        { 
-            cout << count << text[i];
-            g << count << text[i];
-        }
+        cout << dict.at(temp.substr(0, temp.size() - 1)) << temp.back();
+        g << dict.at(temp.substr(0, temp.size() - 1)) << temp.back();
+        dict[temp] = index;
+        //cout << index << temp << endl;//словарь
+        index++;
     }
     g.close();
     cout << "\nсжатые данные записаны в файл 'output.bin'." << endl;
@@ -107,34 +98,7 @@ void RLE()
         }
         for (int i = 0; i < text.length(); i++)
         {
-            sub_str = "";
-            if (text[i] == '-')
-            {
-                i++;
-                while (isdigit(text[i]))
-                {
-                    sub_str += text[i];
-                    i++;
-                }
-                int count = stoi(sub_str);
-                for (int j = 0; j < count; j++)
-                {
-                    cout << text[j + i];
-                }
-            }
-            if (isdigit(text[i]))
-            {
-                while (isdigit(text[i]))
-                {
-                    sub_str += text[i];
-                    i++;
-                }
-                int count = stoi(sub_str);
-                for (int j = 0; j < count; j++)
-                {
-                    cout << text[i];
-                }
-            }
+            cout << text[i];
         }
         F.close();
     }

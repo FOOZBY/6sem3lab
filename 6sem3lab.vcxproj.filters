@@ -32,5 +32,13 @@
     <ClInclude Include="RLE.h">
       <Filter>Исходные файлы</Filter>
     </ClInclude>
+    <ClInclude Include="LZ78.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="output.bin">
+      <Filter>Файлы ресурсов</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -41,8 +41,12 @@ void BuildTable(Node* root)//функция для создания таблиц
 	}
 
 	if (root->left == NULL && root->right == NULL)
+	{
 		table[root->c] = code;
-
+		cout << root->c << ":";
+		for (int i = 0; i < code.size(); i++)
+			cout << code[i];
+	}
 	
 	if (code.size())
 		code.pop_back();
@@ -53,25 +57,73 @@ void BuildTable(Node* root)//функция для создания таблиц
 void Huffman_alg()
 {
 	//создаём таблицу частот, где смотрим какой символ, сколько раз считывается
-	cout << "Введите название файла (с расширением), если он в одной папке с программой, либо укажите полный путь до файла, включая расширение: ";
-	string file;
-	cin >> file;
-	ifstream f(file);
+	string text = "", sub_str = "",file;
+	HANDLE descriptor = GetStdHandle(STD_OUTPUT_HANDLE);
+	short key = 0, code = 0;
+	do
+	{
+		system("cls");
+		key = key % 2;
+		code = 0;
+		if (key == 0)
+		{
+			SetConsoleTextAttribute(descriptor, 2);
+			cout << "1. Ввод вручную" << endl;
+			SetConsoleTextAttribute(descriptor, 7);
+			cout << "2. Ввод с файла" << endl;
+		}
+		if (key)
+		{
+			cout << "1. Ввод вручную" << endl;
+			SetConsoleTextAttribute(descriptor, 2);
+			cout << "2. Ввод с файла" << endl;
+			SetConsoleTextAttribute(descriptor, 7);
+		}
+		if (code != 13)
+		{
+			code = _getch();
+			if (code == 80 || code == 115)
+				++key;
+			if (code == 72 || code == 119)
+				--key;
+		}
+	} while (code != 13);
+	system("cls");
+	switch (key)
+	{
+	case 0:
+	{
+		cout << "Введите текст: ";
+		getline(cin, text);
+		break;
+	}
+	case 1:
+	{
+		cout << "Введите название файла (с расширением), если он в одной папке с программой, либо укажите полный путь до файла, включая расширение: ";
+		cin >> file;
+		ifstream f(file, ios::in | ios::binary);
+		while (!f.eof())
+		{
+			getline(f, sub_str);
+			text += sub_str;
+		}
+		cout << "файл считан" << endl;
+		f.close();
+		break;
+	}
+	default:
+		cout << "error found, fix it!" << endl;
+		break;
+	}
+
 
 	map<char, int> freq;
 	char c;
-	string str;
-	while (!f.eof())
+	for (int i = 0; i < text.length(); i++)
 	{
-		getline(f, str);
-		for (int i = 0; i < str.length(); i++)
-		{
-			c = str[i];
-			freq[c]++;
-		}
+		c = text[i];
+		freq[c]++;
 	}
-	cout << "файл считан" << endl;
-
 	//создаём список из таблицы частот
 	list<Node*> lst;
 	for (map<char, int>::iterator itr = freq.begin(); itr != freq.end(); ++itr)
@@ -80,6 +132,7 @@ void Huffman_alg()
 		p->c = itr->first;
 		p->a = itr->second;
 		lst.push_back(p);
+		cout << itr->first << ":" << itr->second << endl;
 	}
 	cout << "список частот создан" << endl;
 
@@ -106,31 +159,33 @@ void Huffman_alg()
 	cout << "таблица создана" << endl;
 	cout << "записываем код в файл" << endl;
 	//выводим коды в бинарный файл
-	f.clear(); f.seekg(0); // перемещаем указатель снова в начало файла
+	
 
 	ofstream g("output.bin");
 
 	int count = 0; 
-	char buf = 0;
-	while (!f.eof())
+	char buff = 0;
+	BYTE buf = 0;
+	for (int i = 0; i < text.length(); i++)
 	{
-		getline(f, str);
-		for (int i = 0; i < str.length(); i++)
+		c = text[i];
+		vector<bool> x = table[c];
+		for (int n = 0; n < x.size(); n++)
 		{
-			
-			c = str[i];
-			vector<bool> x = table[c];
-			for (int n = 0; n < x.size(); n++)
+			buf = buf | x[n] << (7 - count);
+			count++;
+			if (count == 8)
 			{
-				buf = buf | x[n] << (7 - count);
-				count++;
-				if (count == 8) 
-				{ 
-					count = 0;   
-					g << buf; 
-					buf = 0; 
-				}
+				count = 0;
+				g << buf;
+				cout << buf;
+				buf = 0;
 			}
+		}
+		if ((i + 1) == text.length() && count != 8)//в итоговыую кодировку записывается лишний символ, чтобы не потерять исходные символы, при декодировании, последний символ не учитывать.
+		{
+			g << buf;
+			cout << buf;
 		}
 	}
 	
@@ -146,7 +201,6 @@ void Huffman_alg()
 		g << ")";
 	}*/
 
-	f.close();
 	g.close();
 	cout << "сжатые данные записаны в файл 'output.bin'." << endl;
 

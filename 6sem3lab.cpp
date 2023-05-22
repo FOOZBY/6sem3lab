@@ -1,6 +1,7 @@
 ﻿#include "HA.h"
 #include "AC.h"
 #include "RLE.h"
+#include "LZ78.h"
 
 int main()
 {
@@ -116,7 +117,7 @@ int main()
         RLE();//Кодирование длин серий (RLE)
         break;
     case 2:
-        cout << "2 entered" << endl;//Алгоритм Лемпеля-Зива (LZ78)
+        LZ78();//Алгоритм Лемпеля-Зива (LZ78)
         break;
     case 3:
         cout << "3 entered" << endl;//Преобразование Барроуза-Уиллера (BWT)
