@@ -8,6 +8,8 @@
 #include <map>
 #include <list>
 #include <iomanip>
+#include <algorithm>
+#include <set>
 
 using namespace std;
 

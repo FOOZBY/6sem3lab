@@ -35,6 +35,12 @@
     <ClInclude Include="LZ78.h">
       <Filter>Исходные файлы</Filter>
     </ClInclude>
+    <ClInclude Include="BWT.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="MTF.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="output.bin">

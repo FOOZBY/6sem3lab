@@ -131,9 +131,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AC.h" />
+    <ClInclude Include="BWT.h" />
     <ClInclude Include="HA.h" />
     <ClInclude Include="incudes.h" />
     <ClInclude Include="LZ78.h" />
+    <ClInclude Include="MTF.h" />
     <ClInclude Include="RLE.h" />
   </ItemGroup>
   <ItemGroup>

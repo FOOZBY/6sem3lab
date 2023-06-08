@@ -2,10 +2,13 @@
 #include "AC.h"
 #include "RLE.h"
 #include "LZ78.h"
+#include "BWT.h"
+#include "MTF.h"
 
 int main()
 {
     setlocale(0, "");
+    setlocale(LC_NUMERIC, "eng");
     HANDLE descriptor = GetStdHandle(STD_OUTPUT_HANDLE);
     short key = 0, code = 0;
     cout << "Выберете алгоритм сжатия:" << endl;
@@ -120,10 +123,10 @@ int main()
         LZ78();//Алгоритм Лемпеля-Зива (LZ78)
         break;
     case 3:
-        cout << "3 entered" << endl;//Преобразование Барроуза-Уиллера (BWT)
+        BWT();//Преобразование Барроуза-Уиллера (BWT)
         break;
     case 4:
-        cout << "4 entered" << endl;//Преобразование MTF
+        MTF();//Преобразование MTF
         break;
     case 5:
         ArithmeticCoding();//Арифметическое кодирование (AC)

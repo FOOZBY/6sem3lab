@@ -67,7 +67,6 @@ void LZ78()
     dict[""] = 0;
     for (int i = 0; i < text.length(); i++)
     {
-        
         string temp= "";
         temp += text[i];
         while (dict.find(temp) != dict.end())
@@ -75,8 +74,8 @@ void LZ78()
             i++;
             temp += text[i];
         }
-        cout << dict.at(temp.substr(0, temp.size() - 1)) << temp.back();
-        g << dict.at(temp.substr(0, temp.size() - 1)) << temp.back();
+        //cout << dict.at(temp.substr(0, temp.size() - 1)) << temp.back();
+        g << dict.at(temp.substr(0, temp.size() - 1)) << "." << temp.back();
         dict[temp] = index;
         //cout << index << temp << endl;//словарь
         index++;
@@ -84,6 +83,11 @@ void LZ78()
     g.close();
     cout << "\nсжатые данные записаны в файл 'output.bin'." << endl;
     text.clear();
+    map<int, string> decoding_dict;
+    decoding_dict[0] = "";
+    string s_num = "";
+    int num;
+    index = 1;
     cout << "Декодировать файл обратно?[Y(y)/N(n)]: ";
     char choice;
     cin >> choice;
@@ -98,7 +102,21 @@ void LZ78()
         }
         for (int i = 0; i < text.length(); i++)
         {
-            cout << text[i];
+            while (isdigit(text[i]))
+            {
+                s_num += text[i];
+                i++;
+            }
+            num = stoi(s_num);
+            s_num.clear();
+            cout << decoding_dict[num];
+            if (text[i] == '.' && i < text.length())
+            {
+                i++;
+                cout << text[i];
+            }
+            decoding_dict[index] = decoding_dict[num] + text[i];
+            index++;
         }
         F.close();
     }
