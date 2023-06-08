@@ -132,7 +132,7 @@ int main()
         ArithmeticCoding();//Арифметическое кодирование (AC)
         break;
     case 6:
-        cout << "6 entered" << endl;//PPM алгоритм
+        cout << "Not implenented yet" << endl;//PPM алгоритм
         break;
     default:
         cout << "invalid input" << endl;

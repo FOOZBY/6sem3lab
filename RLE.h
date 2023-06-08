@@ -61,6 +61,10 @@ void RLE()
         cout << "error found, fix it!" << endl;
         break;
     }
+    auto st = chrono::high_resolution_clock::now();
+    auto end = chrono::high_resolution_clock::now();
+    chrono::duration<double, milli> duration = end - st;
+    st = chrono::high_resolution_clock::now();
     ofstream g("output.bin");
     int n = text.length();
     for (int i = 0; i < n; i++) 
@@ -73,8 +77,6 @@ void RLE()
             count++;
             i++;
         }
-        if(count) 
-            cout << count * (-1) << sub_str;
         g << count * (-1) << sub_str;
         sub_str = "";
         count = 1;
@@ -86,12 +88,14 @@ void RLE()
         }
         if (i != n) 
         { 
-            cout << count << text[i];
             g << count << text[i];
         }
     }
     g.close();
     cout << "\nсжатые данные записаны в файл 'output.bin'." << endl;
+    end = chrono::high_resolution_clock::now();
+    duration = end - st;
+    cout << "Время кодировки: " << duration.count() << "mils" << endl;
     text.clear();
     cout << "Декодировать файл обратно?[Y(y)/N(n)]: ";
     char choice;
@@ -117,10 +121,12 @@ void RLE()
                     i++;
                 }
                 int count = stoi(sub_str);
-                for (int j = 0; j < count; j++)
+                int j;
+                for (j = 0; j < count; j++)
                 {
                     cout << text[j + i];
                 }
+                i = i + j-1;
             }
             if (isdigit(text[i]))
             {

@@ -43,9 +43,6 @@ void BuildTable(Node* root)//функция для создания таблиц
 	if (root->left == NULL && root->right == NULL)
 	{
 		table[root->c] = code;
-		cout << root->c << ":";
-		for (int i = 0; i < code.size(); i++)
-			cout << code[i];
 	}
 	
 	if (code.size())
@@ -115,8 +112,10 @@ void Huffman_alg()
 		cout << "error found, fix it!" << endl;
 		break;
 	}
-
-
+	auto st = chrono::high_resolution_clock::now();
+	auto end = chrono::high_resolution_clock::now();
+	chrono::duration<double, milli> duration = end - st;
+	st = chrono::high_resolution_clock::now();
 	map<char, int> freq;
 	char c;
 	for (int i = 0; i < text.length(); i++)
@@ -132,7 +131,6 @@ void Huffman_alg()
 		p->c = itr->first;
 		p->a = itr->second;
 		lst.push_back(p);
-		cout << itr->first << ":" << itr->second << endl;
 	}
 	cout << "список частот создан" << endl;
 
@@ -178,14 +176,12 @@ void Huffman_alg()
 			{
 				count = 0;
 				g << buf;
-				cout << buf;
 				buf = 0;
 			}
 		}
 		if ((i + 1) == text.length() && count != 8)//в итоговыую кодировку записывается лишний символ, чтобы не потерять исходные символы, при декодировании, последний символ не учитывать.
 		{
 			g << buf;
-			cout << buf;
 		}
 	}
 	
@@ -203,7 +199,9 @@ void Huffman_alg()
 
 	g.close();
 	cout << "сжатые данные записаны в файл 'output.bin'." << endl;
-
+	end = chrono::high_resolution_clock::now();
+	duration = end - st;
+	cout << "Время кодировки: " << duration.count() << "mils" << endl;
 	cout << "Декодировать файл обратно?[Y(y)/N(n)]: ";
 	char choice;
 	cin >> choice;

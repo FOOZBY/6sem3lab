@@ -134,7 +134,7 @@ void ArithmeticCoding()
 					long double sym_range = j->second.right - j->second.left;
 					if (j->second.left<=(value-low)/range && (value - low) / range < j->second.right)
 					{
-						//decode += j->first;
+						decode += j->first;
 						cout << j->first;
 						high = low + sym_range * range;
 						low = low + j->second.left * range;

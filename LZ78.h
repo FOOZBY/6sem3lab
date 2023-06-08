@@ -61,6 +61,10 @@ void LZ78()
         cout << "error found, fix it!" << endl;
         break;
     }
+    auto st = chrono::high_resolution_clock::now();
+    auto end = chrono::high_resolution_clock::now();
+    chrono::duration<double, milli> duration = end - st;
+    st = chrono::high_resolution_clock::now();
     ofstream g("output.bin");
     map<string, int> dict;
     int index = 1;
@@ -81,6 +85,9 @@ void LZ78()
         index++;
     }
     g.close();
+    end = chrono::high_resolution_clock::now();
+    duration = end - st;
+    cout << "Время кодировки: " << duration.count() << "mils" << endl;
     cout << "\nсжатые данные записаны в файл 'output.bin'." << endl;
     text.clear();
     map<int, string> decoding_dict;
